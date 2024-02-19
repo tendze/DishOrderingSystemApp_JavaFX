@@ -1,0 +1,28 @@
+.text-field {
+    -fx-pref-width: 200px;
+    -fx-pref-height: 30px;
+    -fx-font-size: 14px;
+    -fx-font-family: Insaniburger;
+}
+
+.button {
+    -fx-pref-width: 122px;
+    -fx-pref-height: 30px;
+    -fx-font-size: 14px;
+    -fx-background-color: #d62300;
+    -fx-text-fill: white;
+    -fx-font-family: Insaniburger;
+}
+
+.button:hover {
+    -fx-background-color: #a71b00;
+}
+
+.button:pressed {
+    -fx-background-color: #a71b00;
+}
+
+.anchorPane {
+    -fx-background-color: #FFDAB9;
+    -fx-border-radius: 15px;
+}

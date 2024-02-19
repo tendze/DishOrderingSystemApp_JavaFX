@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #f5ebdc;" styleClass="anchorPane" stylesheets="@authStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kpo_big_dz.AuthController">
+   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="-9.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" rotate="-31.0">
+      <image>
+         <Image url="@../images/burger.png" />
+      </image>
+      <effect>
+         <DropShadow color="#000000a4" />
+      </effect>
+   </ImageView>
+   <AnchorPane layoutX="37.0" layoutY="50.0" prefHeight="201.0" prefWidth="227.0" style="-fx-background-color: white; -fx-background-radius: 20;" styleClass="anchorPane" stylesheets="@authStyle.css">
+      <Button fx:id="logIn" layoutX="58.0" layoutY="129.0" mnemonicParsing="false" prefWidth="111.0" style="-fx-background-radius: 30;" text="LogIn/SingUp" />
+      <TextField fx:id="loginField" layoutX="14.0" layoutY="84.0" prefHeight="27.0" prefWidth="186.0" promptText="Login" styleClass="text-field" />
+      <Label layoutX="28.0" layoutY="14.0" style="-fx-font-family: Insaniburger; -fx-font-size: 30;" text="DURGER KING" />
+      <effect>
+         <DropShadow blurType="GAUSSIAN" color="#000000be" />
+      </effect>
+   </AnchorPane>
+   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="235.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" rotate="-13.5">
+      <image>
+         <Image url="@../images/hotdog.png" />
+      </image>
+      <effect>
+         <DropShadow />
+      </effect>
+   </ImageView>
+   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="235.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true" rotate="-7.1">
+      <image>
+         <Image url="@../images/popcorn.png" />
+      </image>
+      <effect>
+         <DropShadow color="#0000009c" />
+      </effect>
+   </ImageView>
+</AnchorPane>
