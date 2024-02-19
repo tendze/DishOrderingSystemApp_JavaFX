@@ -13,6 +13,7 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("auth/auth.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Authorization");
+
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
