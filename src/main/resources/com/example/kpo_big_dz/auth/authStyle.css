@@ -2,7 +2,7 @@
     -fx-pref-width: 200px;
     -fx-pref-height: 30px;
     -fx-font-size: 14px;
-    -fx-font-family: Insaniburger;
+    -fx-font-family: "Flame Bold";
 }
 
 .button {
@@ -11,7 +11,7 @@
     -fx-font-size: 14px;
     -fx-background-color: #d62300;
     -fx-text-fill: white;
-    -fx-font-family: Insaniburger;
+    -fx-font-family: "Flame Bold";
 }
 
 .button:hover {
