@@ -8,7 +8,6 @@
   <artifactId>KPO_BIG_DZ</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>KPO_BIG_DZ</name>
-
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <junit.version>5.9.2</junit.version>      </properties>

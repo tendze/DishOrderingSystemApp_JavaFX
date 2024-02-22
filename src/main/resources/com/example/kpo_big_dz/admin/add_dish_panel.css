@@ -1,0 +1,26 @@
+.anchor-pale {
+    -fx-background-color: #fdf6ec;
+}
+
+.add-new-dish-label {
+    -fx-font-family: "Flame Bold";
+    -fx-font-size: 30px;
+}
+
+.add-button {
+    -fx-pref-width: 122px;
+    -fx-pref-height: 30px;
+    -fx-font-size: 14px;
+    -fx-background-color: #d62300;
+    -fx-text-fill: white;
+    -fx-font-family: "Flame Bold";
+}
+
+.input-field {
+    -fx-font-family: "Flame Bold";
+}
+
+.dish-already-exists-label {
+    -fx-font-family: "Flame Bold";
+    -fx-font-size: 12px;
+}

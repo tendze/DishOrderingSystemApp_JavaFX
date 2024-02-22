@@ -1,0 +1,16 @@
+.button {
+    -fx-background-color:  #d62300;
+    -fx-background-radius: 30px;
+}
+
+.button:hover {
+    -fx-background-color: #a71b00;
+}
+
+.button:pressed {
+    -fx-background-color: #a71b00;
+}
+
+.label {
+    -fx-font-family: "Flame Bold";
+}

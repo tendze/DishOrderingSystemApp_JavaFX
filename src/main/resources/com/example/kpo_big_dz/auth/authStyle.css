@@ -26,3 +26,21 @@
     -fx-background-color: #FFDAB9;
     -fx-border-radius: 15px;
 }
+
+.check-box {
+    -fx-font-family: "Flame Bold";
+}
+
+.go-back-button {
+    -fx-background-color: #d62300;
+    -fx-pref-width: 30px;
+    -fx-pref-height: 30px;
+}
+
+.go-back-button:hover {
+    -fx-background-color: #a71b00;
+}
+
+.go-back-button:pressed {
+    -fx-background-color: #a71b00;
+}

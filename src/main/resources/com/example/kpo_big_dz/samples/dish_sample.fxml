@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="anchorPale" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="234.0" prefWidth="175.0" styleClass="anchor-pale" stylesheets="@dish_sample.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kpo_big_dz.Controllers.PanelControllers.DishController">
+   <children>
+      <VBox fx:id="infoVBox" alignment="TOP_CENTER" layoutY="-2.0" prefHeight="234.0" prefWidth="175.0" styleClass="dish" stylesheets="@dish_sample.css">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <children>
+            <ImageView fitHeight="101.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/fast-food.png" />
+               </image>
+            </ImageView>
+            <VBox fx:id="infoVbox" alignment="CENTER_LEFT" prefHeight="51.0" prefWidth="155.0" spacing="5.0">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <children>
+                  <Label fx:id="dishNameLabel" prefHeight="21.0" prefWidth="128.0" styleClass="dish-name" stylesheets="@dish_sample.css" text="Name" wrapText="true">
+                     <effect>
+                        <DropShadow color="#0000004e" />
+                     </effect>
+                  </Label>
+                  <Label fx:id="priceLabel" prefHeight="17.0" prefWidth="142.0" styleClass="dish-info" text="Price" />
+                  <Label fx:id="amoutLabel" prefHeight="17.0" prefWidth="156.0" styleClass="dish-info" text="Amout" />
+                  <Label fx:id="difficultyLabel" prefHeight="17.0" prefWidth="206.0" styleClass="dish-info" text="Difficulty" />
+               </children>
+            </VBox>
+         </children>
+         <effect>
+            <DropShadow color="#0000005b" />
+         </effect>
+      </VBox>
+      <Button fx:id="deleteDishButton" layoutX="145.0" layoutY="3.0" mnemonicParsing="false" onAction="#deleteDishRecord" prefHeight="20.0" prefWidth="20.0" styleClass="delete-button">
+         <graphic>
+            <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true" rotate="45.0">
+               <image>
+                  <Image url="@../images/plus-icon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Group layoutX="43.0" layoutY="202.0">
+         <children>
+            <Button fx:id="minusButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" styleClass="minus-button" text="-">
+               <effect>
+                  <DropShadow color="#00000064" />
+               </effect>
+            </Button>
+            <Button fx:id="plusButton" layoutX="64.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" styleClass="plus-button" text="+">
+               <effect>
+                  <DropShadow color="#00000064" />
+               </effect>
+            </Button>
+            <TextField fx:id="quantityField" layoutX="26.0" prefHeight="25.0" prefWidth="38.0" styleClass="quantity-field" />
+         </children>
+      </Group>
+      <Button fx:id="orderButton" alignment="CENTER" layoutX="43.0" layoutY="202.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" styleClass="order-button" text="Заказать">
+         <effect>
+            <DropShadow color="#00000061" />
+         </effect>
+      </Button>
+   </children>
+</AnchorPane>

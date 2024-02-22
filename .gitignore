@@ -36,3 +36,4 @@ build/
 
 ### Mac OS ###
 .DS_Store
+/src/main/java/com/example/kpo_big_dz/DataBase/storage/durgerking.db

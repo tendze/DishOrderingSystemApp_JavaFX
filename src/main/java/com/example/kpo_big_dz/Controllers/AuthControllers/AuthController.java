@@ -1,17 +1,26 @@
 package com.example.kpo_big_dz.Controllers.AuthControllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
+import com.example.kpo_big_dz.Main;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.util.Duration;
+import javafx.stage.Stage;
+
+import com.example.kpo_big_dz.DataBase.SQLite;
+
+import static com.example.kpo_big_dz.Services.ButtonServices.shakeButton;
 
 public class AuthController {
+    public static String loginMemory = "";
 
     @FXML
     private ResourceBundle resources;
@@ -20,38 +29,42 @@ public class AuthController {
     private URL location;
 
     @FXML
-    private Button logIn;
+    private Button logInOrSignUpButton;
 
     @FXML
-    private TextField loginField;
-
+    private TextField authLogInField;
     @FXML
     void initialize() {
-        logIn.setOnAction(
-                (actionEvent -> loginAction())
-        );
+        authLogInField.setText(loginMemory);
     }
 
     @FXML
-    private void loginAction() {
-        shakeButton(logIn);
-    }
-
-    private void shakeButton(Button button) {
-        Timeline timeline = new Timeline(
-                new KeyFrame(Duration.seconds(0), new KeyValue(button.translateXProperty(), 0)),
-                new KeyFrame(Duration.seconds(0.1), new KeyValue(button.translateXProperty(), -5)),
-                new KeyFrame(Duration.seconds(0.2), new KeyValue(button.translateXProperty(), 5)),
-                new KeyFrame(Duration.seconds(0.3), new KeyValue(button.translateXProperty(), -4)),
-                new KeyFrame(Duration.seconds(0.4), new KeyValue(button.translateXProperty(), 4)),
-                new KeyFrame(Duration.seconds(0.5), new KeyValue(button.translateXProperty(), -3)),
-                new KeyFrame(Duration.seconds(0.6), new KeyValue(button.translateXProperty(), 3)),
-                new KeyFrame(Duration.seconds(0.7), new KeyValue(button.translateXProperty(), -2)),
-                new KeyFrame(Duration.seconds(0.8), new KeyValue(button.translateXProperty(), 2)),
-                new KeyFrame(Duration.seconds(0.9), new KeyValue(button.translateXProperty(), -1)),
-                new KeyFrame(Duration.seconds(1), new KeyValue(button.translateXProperty(), 0))
-        );
-        timeline.play();
-
+    public void switchToLogInSignUpScene(ActionEvent e) {
+        try {
+            String loginFieldText = authLogInField.getText();
+            FXMLLoader fxmlLoader;
+            Parent root;
+            if (loginFieldText.isEmpty()) {
+                shakeButton(logInOrSignUpButton);
+                return;
+            } else if (SQLite.isUserInDB(loginFieldText)) {
+                fxmlLoader = new FXMLLoader(Main.class.getResource("auth/login.fxml"));
+                root = fxmlLoader.load();
+                LogInController logInController = fxmlLoader.getController();
+                logInController.setLogIn(loginFieldText);
+            } else {
+                fxmlLoader = new FXMLLoader(Main.class.getResource("auth/signup.fxml"));
+                root = fxmlLoader.load();
+                SignUpController signUpController = fxmlLoader.getController();
+                signUpController.setLogIn(loginFieldText);
+            }
+            loginMemory = loginFieldText;
+            MainSceneControl.stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+            MainSceneControl.scene = new Scene(root);
+            MainSceneControl.stage.setScene(MainSceneControl.scene);
+            MainSceneControl.stage.show();
+        } catch (IOException exception) {
+            System.out.println(exception.getMessage());
+        }
     }
 }

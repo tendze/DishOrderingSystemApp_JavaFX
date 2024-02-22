@@ -1,0 +1,16 @@
+.add-dishes-button {
+    -fx-background-color:  #d62300;
+    -fx-background-radius: 30px;
+}
+
+.add-dishes-button:hover {
+    -fx-background-color: #a71b00;
+}
+
+.add-dishes-button:pressed {
+    -fx-background-color: #a71b00;
+}
+
+.admin-panel-label {
+    -fx-font-family: "Flame Bold";
+}
