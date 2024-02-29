@@ -16,6 +16,10 @@ public class Dish {
         this.cookingTimeSecs = cookingTimeSecs;
     }
 
+    public Dish(String name, int amount, int price)  {
+        this(0, name, amount, price, 0);
+    }
+
     public String getName() {
         return name;
     }

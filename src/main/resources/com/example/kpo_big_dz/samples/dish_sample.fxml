@@ -31,7 +31,7 @@
                   <Insets />
                </VBox.margin>
                <children>
-                  <Label fx:id="dishNameLabel" prefHeight="21.0" prefWidth="128.0" styleClass="dish-name" stylesheets="@dish_sample.css" text="Name" wrapText="true">
+                  <Label fx:id="dishNameLabel" prefHeight="20.0" prefWidth="171.0" styleClass="dish-name" stylesheets="@dish_sample.css" text="Name" wrapText="true">
                      <effect>
                         <DropShadow color="#0000004e" />
                      </effect>
@@ -46,7 +46,7 @@
             <DropShadow color="#0000005b" />
          </effect>
       </VBox>
-      <Button fx:id="deleteDishButton" layoutX="145.0" layoutY="3.0" mnemonicParsing="false" onAction="#deleteDishRecord" prefHeight="20.0" prefWidth="20.0" styleClass="delete-button">
+      <Button fx:id="deleteDishButton" layoutX="145.0" layoutY="3.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" styleClass="delete-button">
          <graphic>
             <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true" rotate="45.0">
                <image>
@@ -55,25 +55,25 @@
             </ImageView>
          </graphic>
       </Button>
-      <Group layoutX="43.0" layoutY="202.0">
-         <children>
-            <Button fx:id="minusButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" styleClass="minus-button" text="-">
-               <effect>
-                  <DropShadow color="#00000064" />
-               </effect>
-            </Button>
-            <Button fx:id="plusButton" layoutX="64.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" styleClass="plus-button" text="+">
-               <effect>
-                  <DropShadow color="#00000064" />
-               </effect>
-            </Button>
-            <TextField fx:id="quantityField" layoutX="26.0" prefHeight="25.0" prefWidth="38.0" styleClass="quantity-field" />
-         </children>
-      </Group>
-      <Button fx:id="orderButton" alignment="CENTER" layoutX="43.0" layoutY="202.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" styleClass="order-button" text="Заказать">
+      <Button fx:id="orderButton" alignment="CENTER" layoutX="43.0" layoutY="202.0" mnemonicParsing="false" onAction="#onOrderButtonClick" prefHeight="25.0" prefWidth="90.0" styleClass="order-button" text="Order">
          <effect>
             <DropShadow color="#00000061" />
          </effect>
       </Button>
+      <Group layoutX="43.0" layoutY="202.0">
+         <children>
+            <Button fx:id="minusButton" mnemonicParsing="false" onAction="#onMinusButtonClick" prefHeight="25.0" prefWidth="26.0" styleClass="minus-button" text="-">
+               <effect>
+                  <DropShadow color="#00000064" />
+               </effect>
+            </Button>
+            <Button fx:id="plusButton" layoutX="64.0" mnemonicParsing="false" onAction="#onPlusButtonClick" prefHeight="25.0" prefWidth="26.0" styleClass="plus-button" text="+">
+               <effect>
+                  <DropShadow color="#00000064" />
+               </effect>
+            </Button>
+            <TextField fx:id="quantityField" alignment="CENTER" layoutX="26.0" prefHeight="25.0" prefWidth="38.0" styleClass="quantity-field" />
+         </children>
+      </Group>
    </children>
 </AnchorPane>

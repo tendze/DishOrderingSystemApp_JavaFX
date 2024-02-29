@@ -6,9 +6,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import com.example.kpo_big_dz.Models.Dish;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Pair;
 
 public class DishController {
     @FXML
@@ -45,32 +47,67 @@ public class DishController {
     private Button orderButton;
 
     @FXML
-    public void deleteDishRecord(ActionEvent e) {
+    public void onOrderButtonClick(ActionEvent e) {
+        setPlusMinusGroupButtonVisible(true);
+        orderButton.setVisible(false);
+        quantityField.setText("1");
+
+        dishesInCartCountButton.setVisible(true);
+        int currentDishesInCartCount = Integer.parseInt(dishesInCartCountButton.getText());
+        dishesInCartCountButton.setText(String.valueOf(currentDishesInCartCount + 1));
+        currentUserPanel.currentDishesCount.put(dishNameLabel.getText(),
+                new Pair<>(Integer.parseInt(priceLabel.getText().replace("$", "")), currentDishesInCartCount + 1));
     }
 
-    private int rowIndex;
-    private int columnIndex;
+    @FXML
+    public void onPlusButtonClick(ActionEvent e) {
+        quantityField.setText(String.valueOf(Integer.parseInt(quantityField.getText()) + 1));
+        int currentDishesInCartCount = Integer.parseInt(dishesInCartCountButton.getText());
+        dishesInCartCountButton.setText(String.valueOf(currentDishesInCartCount + 1));
+        currentUserPanel.currentDishesCount.put(dishNameLabel.getText(),
+                new Pair<>(Integer.parseInt(priceLabel.getText().replace("$", "")), currentDishesInCartCount + 1));
+    }
+
+    @FXML
+    public void onMinusButtonClick(ActionEvent e) {
+        int currentQuantity = Integer.parseInt(String.valueOf(Integer.parseInt(quantityField.getText()) - 1));
+        int currentDishesInCartCount = Integer.parseInt(dishesInCartCountButton.getText());
+
+        if (currentDishesInCartCount == 1) {
+            dishesInCartCountButton.setVisible(false);
+            dishesInCartCountButton.setText("0");
+        } else {
+            dishesInCartCountButton.setText(String.valueOf(currentDishesInCartCount - 1));
+        }
+
+        if (currentQuantity == 0) {
+            setPlusMinusGroupButtonVisible(false);
+            orderButton.setVisible(true);
+            currentUserPanel.currentDishesCount.remove(dishNameLabel.getText());
+        } else {
+            quantityField.setText(String.valueOf(currentQuantity));
+            currentUserPanel.currentDishesCount.put(dishNameLabel.getText(),
+                    new Pair<>(Integer.parseInt(priceLabel.getText().replace("$", "")), currentQuantity));
+        }
+    }
+
+    @FXML
+    void initialize() {
+        quantityField.setEditable(false);
+    }
+
     private int dishID;
+    private int dishQuantity;
+    private Button dishesInCartCountButton;
+    private UserPanelController currentUserPanel;
 
     public void setData(Dish dish) {
         this.dishID = dish.getDishID();
         dishNameLabel.setText(dish.getName());
-        priceLabel.setText(String.valueOf(dish.getPrice()) + "$");
-        amoutLabel.setText("Remains: " + String.valueOf(dish.getAmout()) + "pcs.");
+        priceLabel.setText(dish.getPrice() + "$");
+        amoutLabel.setText("Remains: " + dish.getAmout() + "pcs.");
         difficultyLabel.setText("Cooking time: " + dish.getCookingTimeSecs() + "s.");
-    }
-
-    public void setRowAndColumnIndex(int row, int column) {
-        rowIndex = row;
-        columnIndex = column;
-    }
-
-    public int getRowIndex() {
-        return rowIndex;
-    }
-
-    public int getColumnIndex() {
-        return columnIndex;
+        dishQuantity = dish.getAmout();
     }
 
     public int getDishID() {
@@ -90,4 +127,19 @@ public class DishController {
         infoVBox.setPrefHeight(211);
         anchorPale.setPrefHeight(211);
     }
+
+    public void setUserDishView() {
+        deleteDishButton.setVisible(false);
+    }
+    public void setPlusMinusGroupButtonVisible(Boolean visible) {
+        quantityField.setVisible(visible);
+        plusButton.setVisible(visible);
+        minusButton.setVisible(visible);
+    }
+
+    public void setDishesInCartCountButton(Button button) {
+        this.dishesInCartCountButton = button;
+    }
+
+    public void setCurrentUserPanelController(UserPanelController panel) { this.currentUserPanel = panel; }
 }

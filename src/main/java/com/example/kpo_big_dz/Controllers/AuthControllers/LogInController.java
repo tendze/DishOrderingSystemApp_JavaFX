@@ -75,13 +75,12 @@ public class LogInController {
             switchToAuthScene(e);
             try {
                 boolean isUserAdmin = isUserAdmin(loginInput);
-                String fileUrl = isUserAdmin ? "admin/admin_panel.fxml" : "user_panel.fxml";
+                String fileUrl = isUserAdmin ? "admin/admin_panel.fxml" : "user/user_panel.fxml";
                 String windowTitle = isUserAdmin ? "Admin panel" : "Durger King";
                 Stage window = openNewWindow(fileUrl, windowTitle);
             } catch (IOException exception) {
                 System.out.println("loginToProgram exception: " + exception.getMessage());
             }
-
         }
     }
 

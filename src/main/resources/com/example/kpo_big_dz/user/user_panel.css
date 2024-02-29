@@ -11,6 +11,11 @@
     -fx-background-color: #a71b00;
 }
 
+.button-dishes-count {
+    -fx-text-fill: White;
+    -fx-font-family: "Flame Bold";
+}
+
 .label {
     -fx-font-family: "Flame Bold";
 }
