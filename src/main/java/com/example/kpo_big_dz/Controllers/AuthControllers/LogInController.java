@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.example.kpo_big_dz.Controllers.PanelControllers.AdminPanelController;
+import com.example.kpo_big_dz.Controllers.PanelControllers.UserPanelController;
 import com.example.kpo_big_dz.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +22,7 @@ import static com.example.kpo_big_dz.Services.ButtonServices.shakeButton;
 import static com.example.kpo_big_dz.Services.TextFieldServices.flashTextField;
 import static com.example.kpo_big_dz.Services.WindowServices.*;
 import static com.example.kpo_big_dz.DataBase.SQLite.*;
+import com.example.kpo_big_dz.Interfaces.IUser;
 
 public class LogInController {
 
@@ -77,7 +80,9 @@ public class LogInController {
                 boolean isUserAdmin = isUserAdmin(loginInput);
                 String fileUrl = isUserAdmin ? "admin/admin_panel.fxml" : "user/user_panel.fxml";
                 String windowTitle = isUserAdmin ? "Admin panel" : "Durger King";
-                Stage window = openNewWindow(fileUrl, windowTitle);
+                IUser window = openNewWindow(fileUrl, windowTitle);
+                int userID = getUserIdByLogin(loginInput);
+                window.setUserID(userID);
             } catch (IOException exception) {
                 System.out.println("loginToProgram exception: " + exception.getMessage());
             }

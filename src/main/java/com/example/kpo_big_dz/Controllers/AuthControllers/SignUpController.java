@@ -5,6 +5,9 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+import com.example.kpo_big_dz.Controllers.PanelControllers.AdminPanelController;
+import com.example.kpo_big_dz.Controllers.PanelControllers.UserPanelController;
+import com.example.kpo_big_dz.Interfaces.IUser;
 import com.example.kpo_big_dz.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -87,9 +90,12 @@ public class SignUpController {
             addUser(loginInput, signUpPasswordField.getText(), isAdminCheckBox.isSelected());
             switchToAuthScene(e);
             try {
-                String fileUrl = isAdminCheckBox.isSelected() ? "admin/admin_panel.fxml" : "user/user_panel.fxml";
-                String windowTitle = isAdminCheckBox.isSelected() ? "Admin Panel" : "Durger King";
-                Stage window = openNewWindow(fileUrl, windowTitle);
+                boolean isCheckBoxSelected = isAdminCheckBox.isSelected();
+                String fileUrl = isCheckBoxSelected ? "admin/admin_panel.fxml" : "user/user_panel.fxml";
+                String windowTitle = isCheckBoxSelected ? "Admin Panel" : "Durger King";
+                IUser window = openNewWindow(fileUrl, windowTitle);
+                int userID = getUserIdByLogin(loginInput);
+                window.setUserID(userID);
             } catch (IOException exception) {
                 System.out.println("singUpToProgram exception: " + exception.getMessage());
             }

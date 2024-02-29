@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import static com.example.kpo_big_dz.Services.ButtonServices.shakeButton;
 import static com.example.kpo_big_dz.Services.TextFieldServices.flashTextField;
@@ -74,7 +75,6 @@ public class AddNewDishController {
 
         if (!isTheresProblem) {
             addDish(name, price, quantity, difficulty);
-            shakeButton(addNewDishButton);
             dishExistsLabel.setVisible(false);
         } else {
             shakeButton(addNewDishButton);
@@ -93,5 +93,9 @@ public class AddNewDishController {
     void initialize() {
         dishNameField.textProperty().addListener(
                 (observable, oldValue, newValue) -> dishExistsLabel.setVisible(false));
+    }
+
+    public Stage getCurrentStage() {
+        return (Stage)priceField.getScene().getWindow();
     }
 }

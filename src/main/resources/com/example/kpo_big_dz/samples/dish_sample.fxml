@@ -60,7 +60,7 @@
             <DropShadow color="#00000061" />
          </effect>
       </Button>
-      <Group layoutX="43.0" layoutY="202.0">
+      <Group fx:id="plusMinusGroup" layoutX="43.0" layoutY="202.0">
          <children>
             <Button fx:id="minusButton" mnemonicParsing="false" onAction="#onMinusButtonClick" prefHeight="25.0" prefWidth="26.0" styleClass="minus-button" text="-">
                <effect>

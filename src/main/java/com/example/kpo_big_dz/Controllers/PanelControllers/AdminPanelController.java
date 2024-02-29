@@ -17,11 +17,12 @@ import javafx.stage.WindowEvent;
 import static com.example.kpo_big_dz.Services.ButtonServices.shakeButton;
 import static com.example.kpo_big_dz.Services.WindowServices.*;
 
-import com.example.kpo_big_dz.Interfaces.IWindow;
+import com.example.kpo_big_dz.Interfaces.IMenu;
+import com.example.kpo_big_dz.Interfaces.IUser;
 import static com.example.kpo_big_dz.TempData.Observer.addSubscriber;
 import static com.example.kpo_big_dz.Services.GridPanelServices.loadToGridPaneDishes;
 
-public class AdminPanelController implements IWindow {
+public class AdminPanelController implements IMenu, IUser {
     private Boolean isAddNewDishOpened = false;
 
     @FXML
@@ -31,13 +32,10 @@ public class AdminPanelController implements IWindow {
     private URL location;
 
     @FXML
-    private GridPane dishesContainer;
+    private GridPane menuGridPane;
 
     @FXML
     private Button addNewDishButton;
-
-    @FXML
-    private Button statisticsInfoButton;
 
     @FXML
     private AnchorPane anchorPane;
@@ -46,15 +44,21 @@ public class AdminPanelController implements IWindow {
     private VBox dishVBox;
 
     @FXML
+    private Button userOrdersListButton;
+
+    @FXML
+    private Button statisticsInfoButton;
+
+    @FXML
     public void openAddNewDishWindow(ActionEvent e) {
         if (isAddNewDishOpened) {
             shakeButton(addNewDishButton);
             return;
         }
         try {
-            Stage addDishWindow = openNewWindow("admin/add_dish_panel.fxml", "Add Dish");
+            AddNewDishController addDishWindow = openNewWindow("admin/add_dish_panel.fxml", "Add Dish");
             isAddNewDishOpened = true;
-            addDishWindow.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            addDishWindow.getCurrentStage().setOnCloseRequest(new EventHandler<WindowEvent>() {
                 public void handle(WindowEvent we) {
                     isAddNewDishOpened = false;
                 }
@@ -65,13 +69,27 @@ public class AdminPanelController implements IWindow {
     }
 
     @FXML
+    public void onUserOrderListButton(ActionEvent e) {
+
+    }
+    @FXML
     void initialize() {
         addSubscriber(this);
-        loadToGridPaneDishes(dishesContainer, true, 2);
+        loadToGridPaneDishes(menuGridPane, true, 2);
     }
 
     @Override
     public void updateMenuList() {
-        loadToGridPaneDishes(dishesContainer, true, 2);
+        loadToGridPaneDishes(menuGridPane, true, 2);
+    }
+
+    private int id;
+
+    public int getUserID() {
+        return id;
+    }
+
+    public void setUserID(int id) {
+        this.id = id;
     }
 }

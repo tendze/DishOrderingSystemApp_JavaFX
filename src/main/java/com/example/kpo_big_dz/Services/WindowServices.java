@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class WindowServices {
-    public static Stage openNewWindow(String fxmlFilePath, String windowTitle) throws IOException {
+    public static <T> T openNewWindow(String fxmlFilePath, String windowTitle) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxmlFilePath));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
@@ -19,6 +19,6 @@ public class WindowServices {
         stage.setTitle(windowTitle);
         stage.getIcons().add(new Image(Main.class.getResourceAsStream("images/durger-king-logo.png")));
         stage.show();
-        return stage;
+        return fxmlLoader.getController();
     }
 }

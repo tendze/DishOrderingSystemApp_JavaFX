@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.kpo_big_dz.Models.Dish;
-import static com.example.kpo_big_dz.TempData.Observer.notifySubscribers;
+import static com.example.kpo_big_dz.TempData.Observer.notifyMenuSubscribers;
 
 public class SQLite {
     public static final String dbName = "durgerking.db";
@@ -100,7 +100,7 @@ public class SQLite {
             pstmt.setInt(4, cookingTimeSecs);
             pstmt.setInt(5, 0);
             pstmt.executeUpdate();
-            notifySubscribers();
+            notifyMenuSubscribers();
         } catch (SQLException e) {
             System.out.println("addDish() error: " + e.getMessage());
             throw new RuntimeException(e);
@@ -121,7 +121,7 @@ public class SQLite {
             pstmt.setInt(4, cookingTimeSecs);
             pstmt.setInt(5, 0);
             pstmt.executeUpdate();
-            notifySubscribers();
+            notifyMenuSubscribers();
         } catch (SQLException e) {
             System.out.println("addDish() error: " + e.getMessage());
             throw new RuntimeException(e);
@@ -183,7 +183,25 @@ public class SQLite {
              PreparedStatement pstmt = conn.prepareStatement(deleteDishQuery)) {
             pstmt.setInt(1, dishID);
             pstmt.executeUpdate();
-            notifySubscribers();
+            notifyMenuSubscribers();
+        } catch (SQLException e) {
+            System.out.println("addDish() error: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static int getUserIdByLogin(String login) {
+        String deleteDishQuery = "SELECT id FROM user WHERE login = ? LIMIT 1";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(deleteDishQuery)) {
+            pstmt.setString(1, login);
+            var result = pstmt.executeQuery();
+            if (!result.next()) {
+                return -1;
+            } else {
+                return result.getInt("id");
+            }
+
         } catch (SQLException e) {
             System.out.println("addDish() error: " + e.getMessage());
             throw new RuntimeException(e);

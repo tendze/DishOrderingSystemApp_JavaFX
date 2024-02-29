@@ -1,5 +1,5 @@
 package com.example.kpo_big_dz.Interfaces;
 
-public interface IWindow {
+public interface IMenu {
     public void updateMenuList();
 }

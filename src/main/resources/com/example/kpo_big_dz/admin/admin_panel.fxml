@@ -9,32 +9,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="652.0" prefWidth="491.0" style="-fx-background-color: #f5ebdc;" stylesheets="@admin_panel.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kpo_big_dz.Controllers.PanelControllers.AdminPanelController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="51.0" layoutY="46.0" prefHeight="522.0" prefWidth="391.0">
-         <children>
-            <Label alignment="TOP_CENTER" prefHeight="45.0" prefWidth="211.0" styleClass="admin-panel-label" text="ADMIN PANEL">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </Label>
-            <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="476.0" prefWidth="393.0">
-               <effect>
-                  <DropShadow color="#ff00005b" />
-               </effect>
-               <content>
-                  <GridPane fx:id="dishesContainer">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                  </GridPane>
-               </content>
-            </ScrollPane>
-         </children>
-      </VBox>
       <Button fx:id="addNewDishButton" layoutX="219.0" layoutY="587.0" mnemonicParsing="false" onAction="#openAddNewDishWindow" prefHeight="51.0" prefWidth="51.0" styleClass="add-dishes-button">
          <font>
             <Font size="20.0" />
@@ -50,7 +28,7 @@
             <DropShadow color="#ff0000a1" />
          </effect>
       </Button>
-      <Button fx:id="userOrdersListButton" layoutX="124.0" layoutY="587.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="51.0" styleClass="add-dishes-button">
+      <Button fx:id="userOrdersListButton" layoutX="124.0" layoutY="587.0" mnemonicParsing="false" onAction="#onUserOrderListButton" prefHeight="51.0" prefWidth="51.0" styleClass="add-dishes-button">
          <font>
             <Font size="20.0" />
          </font>
@@ -80,5 +58,34 @@
             <DropShadow color="#ff0000a1" />
          </effect>
       </Button>
+      <Label alignment="TOP_CENTER" layoutX="141.0" layoutY="43.0" prefHeight="45.0" prefWidth="211.0" styleClass="admin-panel-label" text="ADMIN PANEL">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="49.0" layoutY="88.0" prefHeight="476.0" prefWidth="393.0">
+         <effect>
+            <DropShadow color="#ff00005b" />
+         </effect>
+         <content>
+            <GridPane fx:id="menuGridPane">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+            </GridPane>
+         </content>
+      </ScrollPane>
+      <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="49.0" layoutY="88.0" prefHeight="476.0" prefWidth="393.0" visible="false">
+         <effect>
+            <DropShadow color="#ff00005b" />
+         </effect>
+         <content>
+            <GridPane fx:id="userOrderGridPane">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+            </GridPane>
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

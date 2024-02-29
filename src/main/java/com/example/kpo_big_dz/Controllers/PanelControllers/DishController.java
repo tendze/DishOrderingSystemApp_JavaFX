@@ -2,6 +2,7 @@ package com.example.kpo_big_dz.Controllers.PanelControllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
@@ -47,8 +48,11 @@ public class DishController {
     private Button orderButton;
 
     @FXML
+    private Group plusMinusGroup;
+
+    @FXML
     public void onOrderButtonClick(ActionEvent e) {
-        setPlusMinusGroupButtonVisible(true);
+        plusMinusGroup.setVisible(true);
         orderButton.setVisible(false);
         quantityField.setText("1");
 
@@ -81,7 +85,7 @@ public class DishController {
         }
 
         if (currentQuantity == 0) {
-            setPlusMinusGroupButtonVisible(false);
+            plusMinusGroup.setVisible(false);
             orderButton.setVisible(true);
             currentUserPanel.currentDishesCount.remove(dishNameLabel.getText());
         } else {
@@ -132,9 +136,7 @@ public class DishController {
         deleteDishButton.setVisible(false);
     }
     public void setPlusMinusGroupButtonVisible(Boolean visible) {
-        quantityField.setVisible(visible);
-        plusButton.setVisible(visible);
-        minusButton.setVisible(visible);
+        plusMinusGroup.setVisible(visible);
     }
 
     public void setDishesInCartCountButton(Button button) {

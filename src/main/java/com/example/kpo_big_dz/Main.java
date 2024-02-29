@@ -10,7 +10,7 @@ import java.io.IOException;
 
 import com.example.kpo_big_dz.DataBase.SQLite;
 
-public class Main extends Application {
+    public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         SQLite.initDB();
