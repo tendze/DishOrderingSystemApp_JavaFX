@@ -42,6 +42,7 @@ public class UserOrderController {
     public void onCookButtonClick(ActionEvent e) {
         int orderId = Integer.parseInt(orderNumberLabel.getText().replace("Order №", ""));
         int userId = getUserIdByOrderId(orderId);
+        System.out.println(userId);
         updateOrderStatus(orderId, OrderStatus.Cooking, userId);
         CookingThread thread = new CookingThread(orderId, userId);
         currentCookingThreads.put(orderId, thread);
@@ -93,13 +94,15 @@ public class UserOrderController {
     public void setCancelButtonView() {
         cookButton.setVisible(true);
         cookButton.setText("Cancel");
-        infoVBox.setPrefHeight(139);
+        cookButton.setLayoutX(256);
+        infoVBox.setPrefWidth(139);
     }
 
     public void setPurchaseButtonView() {
         cookButton.setVisible(true);
         cookButton.setText("Purchase");
-        infoVBox.setPrefHeight(139);
+        cookButton.setLayoutX(248);
+        infoVBox.setPrefWidth(139);
     }
 
     public Button getCookButton() {

@@ -21,10 +21,12 @@ import static com.example.kpo_big_dz.DataBase.SQLite.*;
 import javafx.util.Pair;
 
 import static com.example.kpo_big_dz.Services.GridPanelServices.*;
-import static com.example.kpo_big_dz.TempData.Observer.addMenuSubscriber;
-import static com.example.kpo_big_dz.TempData.Observer.notifyAdminOrderListSubscribers;
+import static com.example.kpo_big_dz.TempData.Observer.*;
 
 public class UserPanelController implements IMenu, IUser, IUserOrders {
+
+    @FXML
+    private Button exclamationButton;
 
     @FXML
     private ResourceBundle resources;
@@ -80,6 +82,7 @@ public class UserPanelController implements IMenu, IUser, IUserOrders {
     @FXML
     void initialize() {
         addMenuSubscriber(this);
+        addUserOrderListSubscriber(this);
         buttonDishesCount.setVisible(false);
         loadToGridPaneDishes(dishesGridPane, false, buttonDishesCount, 2, this);
     }
@@ -114,6 +117,7 @@ public class UserPanelController implements IMenu, IUser, IUserOrders {
     public void onOrderButtonClick(ActionEvent e) {
         cartGridPane.getChildren().clear();
         addNewOrder(getUserID(), currentDishesCount);
+        exclamationButton.setVisible(true);
 
         currentDishesCount.clear();
         loadToGridPaneDishes(dishesGridPane, false, buttonDishesCount, 2, this);
@@ -127,6 +131,7 @@ public class UserPanelController implements IMenu, IUser, IUserOrders {
     public void onUserOrdersListButtonClick(ActionEvent e) {
         mainLabel.setText("YOUR ORDERS");
         hideAllScrollPanes();
+        exclamationButton.setVisible(false);
         userOrdersScrollPane.setVisible(true);
         loadToUserOrdersGridPane(userOrdersGridPane, getUserID(), 1);
     }

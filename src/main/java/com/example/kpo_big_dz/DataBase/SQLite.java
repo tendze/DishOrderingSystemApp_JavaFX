@@ -292,6 +292,7 @@ public class SQLite {
                     case ("Cooking") -> status = OrderStatus.Cooking;
                     case ("Ready") -> status = OrderStatus.Ready;
                     case ("Completed") -> status = OrderStatus.Completed;
+                    case ("Cancelled") -> status = OrderStatus.Cancelled;
                 }
                 result.add(new Order(
                         rs.getInt(1),
@@ -322,6 +323,7 @@ public class SQLite {
                     case ("Cooking") -> status = OrderStatus.Cooking;
                     case ("Ready") -> status = OrderStatus.Ready;
                     case ("Completed") -> status = OrderStatus.Completed;
+                    case ("Cancelled") -> status = OrderStatus.Cancelled;
                 }
                 result.add(new Order(
                         rs.getInt(1),
@@ -359,7 +361,7 @@ public class SQLite {
             pstmt.setInt(1, orderId);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                return rs.getInt(1);
+                return rs.getInt(2);
             }
             return -1;
         } catch (SQLException e) {

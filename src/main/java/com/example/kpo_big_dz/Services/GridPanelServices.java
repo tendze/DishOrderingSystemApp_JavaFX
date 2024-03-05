@@ -23,6 +23,7 @@ import java.util.Map;
 import static com.example.kpo_big_dz.DataBase.SQLite.*;
 import static com.example.kpo_big_dz.TempData.CurrentDishes.dishes;
 import static com.example.kpo_big_dz.TempData.CurrentUserOrders.orders;
+import static com.example.kpo_big_dz.TempData.CurrentCookingThreads.currentCookingThreads;
 
 public class GridPanelServices {
     public static void loadToGridPaneDishes(GridPane gridPane,
@@ -113,11 +114,15 @@ public class GridPanelServices {
             int column = 0;
             int row = 1;
             for (Order order : orders) {FXMLLoader fxmlLoader = new FXMLLoader();
+                if (order.getOrderStatus() == OrderStatus.Completed ||
+                        order.getOrderStatus() == OrderStatus.Cancelled) {
+                    continue;
+                }
                 fxmlLoader.setLocation(Main.class.getResource("samples/user_order_sample.fxml"));
                 AnchorPane orderBox = fxmlLoader.load();
                 UserOrderController controller = fxmlLoader.getController();
                 controller.setData(order);
-                if (order.getOrderStatus() == OrderStatus.Cooking) {
+                if (controller.getOrderStatus() != OrderStatus.Processing) {
                     controller.setNoButtonsView();
                 }
                 gridPane.add(orderBox, column++, row);
@@ -149,8 +154,17 @@ public class GridPanelServices {
                 if (order.getOrderStatus() == OrderStatus.Cooking ||
                     order.getOrderStatus() == OrderStatus.Processing) {
                     controller.setCancelButtonView();
+                    controller.getCookButton().setOnAction(e -> {
+                        if (currentCookingThreads.containsKey(order.getOrderId())) {
+                            currentCookingThreads.get(order.getOrderId()).interrupt();
+                        }
+                        updateOrderStatus(order.getOrderId(), OrderStatus.Cancelled, userId);
+                    });
                 } else if (order.getOrderStatus() == OrderStatus.Ready) {
                     controller.setPurchaseButtonView();
+                    controller.getCookButton().setOnAction(e -> {
+                        updateOrderStatus(order.getOrderId(), OrderStatus.Completed, userId);
+                    });
                 } else {
                     controller.setNoButtonsView();
                 }

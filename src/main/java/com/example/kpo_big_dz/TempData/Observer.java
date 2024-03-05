@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Observer {
-    public static List<IMenu> subscribers = new ArrayList<>();
+    public static List<IMenu> menuSubscribers = new ArrayList<>();
     public static List<IAdminOrders> adminSubscribers = new ArrayList<>();
 
     public static List<IUserOrders> userSubscribers = new ArrayList<>();
     public static void notifyMenuSubscribers() {
-        for (IMenu window : subscribers) {
+        for (IMenu window : menuSubscribers) {
             window.updateMenuList();
         }
     }
@@ -28,7 +28,7 @@ public class Observer {
         }
     }
     public static void addMenuSubscriber(IMenu w) {
-        subscribers.add(w);
+        menuSubscribers.add(w);
     }
     public static void addAdminOrderListSubscriber(IAdminOrders w) {
         adminSubscribers.add(w);
