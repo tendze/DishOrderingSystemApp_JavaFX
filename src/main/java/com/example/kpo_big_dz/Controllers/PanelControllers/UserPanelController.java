@@ -1,9 +1,7 @@
 package com.example.kpo_big_dz.Controllers.PanelControllers;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -16,18 +14,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
-import static com.example.kpo_big_dz.Services.GridPanelServices.loadToGridPaneCartDishes;
-import static com.example.kpo_big_dz.Services.GridPanelServices.loadToGridPaneDishes;
-import com.example.kpo_big_dz.Interfaces.IMenu;
-import com.example.kpo_big_dz.Interfaces.IUser;
+import com.example.kpo_big_dz.Interfaces.*;
+import static com.example.kpo_big_dz.DataBase.SQLite.*;
 import javafx.util.Pair;
 
-import static com.example.kpo_big_dz.TempData.Observer.addSubscriber;
+import static com.example.kpo_big_dz.Services.GridPanelServices.*;
+import static com.example.kpo_big_dz.TempData.Observer.addMenuSubscriber;
+import static com.example.kpo_big_dz.TempData.Observer.notifyAdminOrderListSubscribers;
 
-public class UserPanelController implements IMenu, IUser {
+public class UserPanelController implements IMenu, IUser, IUserOrders {
 
     @FXML
     private ResourceBundle resources;
@@ -63,7 +60,7 @@ public class UserPanelController implements IMenu, IUser {
     private ScrollPane cartScrollPane;
 
     @FXML
-    private Button purchaseAndOrderButton;
+    private Button orderButton;
 
     @FXML
     private ImageView sadSmileImage;
@@ -75,8 +72,14 @@ public class UserPanelController implements IMenu, IUser {
     private Group cartGroup;
 
     @FXML
+    private ScrollPane userOrdersScrollPane;
+
+    @FXML
+    private GridPane userOrdersGridPane;
+
+    @FXML
     void initialize() {
-        addSubscriber(this);
+        addMenuSubscriber(this);
         buttonDishesCount.setVisible(false);
         loadToGridPaneDishes(dishesGridPane, false, buttonDishesCount, 2, this);
     }
@@ -84,31 +87,52 @@ public class UserPanelController implements IMenu, IUser {
     @FXML
     public void onMenuButtonClick(ActionEvent e) {
         mainLabel.setText("MENU");
-        cartGroup.setVisible(false);
+        hideAllScrollPanes();
         menuScrollPane.setVisible(true);
     }
 
     @FXML
     public void onCartButtonClick(ActionEvent e) {
         mainLabel.setText("CART");
-        menuScrollPane.setVisible(false);
+        hideAllScrollPanes();
         cartGroup.setVisible(true);
         if (currentDishesCount.isEmpty()) {
             cartScrollPane.setPadding(new Insets(5, 20, 20, 20));
             sadSmileImage.setVisible(true);
             cartEmptyLabel.setVisible(true);
-            purchaseAndOrderButton.setVisible(false);
+            orderButton.setVisible(false);
         } else {
             sadSmileImage.setVisible(false);
             cartEmptyLabel.setVisible(false);
             cartScrollPane.setPadding(new Insets(5, 20, 30, 20));
-            purchaseAndOrderButton.setVisible(true);
+            orderButton.setVisible(true);
         }
         loadToGridPaneCartDishes(cartGridPane, 1, currentDishesCount);
     }
 
+    @FXML
+    public void onOrderButtonClick(ActionEvent e) {
+        cartGridPane.getChildren().clear();
+        addNewOrder(getUserID(), currentDishesCount);
+
+        currentDishesCount.clear();
+        loadToGridPaneDishes(dishesGridPane, false, buttonDishesCount, 2, this);
+        loadToGridPaneCartDishes(cartGridPane, 1, currentDishesCount);
+        buttonDishesCount.setText("0");
+        buttonDishesCount.setVisible(false);
+        onCartButtonClick(e);
+    }
+
+    @FXML
+    public void onUserOrdersListButtonClick(ActionEvent e) {
+        mainLabel.setText("YOUR ORDERS");
+        hideAllScrollPanes();
+        userOrdersScrollPane.setVisible(true);
+        loadToUserOrdersGridPane(userOrdersGridPane, getUserID(), 1);
+    }
+
     // Название блюда: цена - количество
-    public HashMap<String, Pair<Integer, Integer>> currentDishesCount = new HashMap<String, Pair<Integer, Integer>>();
+    public HashMap<String, Pair<Integer, Integer>> currentDishesCount = new HashMap<>();
 
     private int id;
 
@@ -150,6 +174,19 @@ public class UserPanelController implements IMenu, IUser {
             buttonDishesCount.setVisible(false);
             buttonDishesCount.setText("0");
         }
+    }
+
+    @Override
+    public void updateUserOrderList(int userId) {
+        if (getUserID() == userId) {
+            loadToUserOrdersGridPane(userOrdersGridPane, getUserID(), 1);
+        }
+    }
+
+    private void hideAllScrollPanes() {
+        cartGroup.setVisible(false);
+        menuScrollPane.setVisible(false);
+        userOrdersScrollPane.setVisible(false);
     }
 
     public int getUserID() {

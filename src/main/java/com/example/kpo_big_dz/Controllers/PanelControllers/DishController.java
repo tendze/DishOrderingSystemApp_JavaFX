@@ -60,16 +60,17 @@ public class DishController {
         int currentDishesInCartCount = Integer.parseInt(dishesInCartCountButton.getText());
         dishesInCartCountButton.setText(String.valueOf(currentDishesInCartCount + 1));
         currentUserPanel.currentDishesCount.put(dishNameLabel.getText(),
-                new Pair<>(Integer.parseInt(priceLabel.getText().replace("$", "")), currentDishesInCartCount + 1));
+                new Pair<>(Integer.parseInt(priceLabel.getText().replace("$", "")), 1));
     }
 
     @FXML
     public void onPlusButtonClick(ActionEvent e) {
-        quantityField.setText(String.valueOf(Integer.parseInt(quantityField.getText()) + 1));
+        int currentDishCount = Integer.parseInt(quantityField.getText());
+        quantityField.setText(String.valueOf(currentDishCount + 1));
         int currentDishesInCartCount = Integer.parseInt(dishesInCartCountButton.getText());
         dishesInCartCountButton.setText(String.valueOf(currentDishesInCartCount + 1));
         currentUserPanel.currentDishesCount.put(dishNameLabel.getText(),
-                new Pair<>(Integer.parseInt(priceLabel.getText().replace("$", "")), currentDishesInCartCount + 1));
+                new Pair<>(Integer.parseInt(priceLabel.getText().replace("$", "")), currentDishCount + 1));
     }
 
     @FXML

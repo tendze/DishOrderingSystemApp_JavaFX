@@ -1,6 +1,7 @@
 .add-dishes-button {
     -fx-background-color:  #d62300;
     -fx-background-radius: 30px;
+
 }
 
 .add-dishes-button:hover {
@@ -9,6 +10,13 @@
 
 .add-dishes-button:pressed {
     -fx-background-color: #a71b00;
+}
+
+.exclamation-button {
+    -fx-background-color:  #d62300;
+    -fx-background-radius: 30px;
+    -fx-text-fill: White;
+    -fx-font-family: "Flame Bold";
 }
 
 .admin-panel-label {

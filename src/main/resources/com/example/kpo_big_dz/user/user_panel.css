@@ -16,6 +16,19 @@
     -fx-font-family: "Flame Bold";
 }
 
+.button-dishes-count:hover {
+}
+
+.button-dishes-count:pressed {
+}
+
 .label {
+    -fx-font-family: "Flame Bold";
+}
+
+.exclamation-button {
+    -fx-background-color:  #d62300;
+    -fx-background-radius: 30px;
+    -fx-text-fill: White;
     -fx-font-family: "Flame Bold";
 }

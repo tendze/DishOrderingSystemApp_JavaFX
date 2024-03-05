@@ -23,6 +23,8 @@
 .delete-button {
     -fx-background-color:  #d62300;
     -fx-background-radius: 30px;
+    -fx-font-family: "Flame Bold";
+    -fx-text-fill: White;
 }
 
 .delete-button:hover {
