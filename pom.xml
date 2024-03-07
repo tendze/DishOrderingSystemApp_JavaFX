@@ -40,6 +40,21 @@
       <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>sqlite.jdbc</groupId>
+      <artifactId>sample</artifactId>
+      <version>3.45.1.0</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/src/main/resources/sqlite3/sqlite-jdbc-3.45.1.0.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>org.controlsfx.controls</groupId>
+      <artifactId>sample</artifactId>
+      <version>11.1.0</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/src/main/resources/controlsfx/controlsfx-11.1.0.jar</systemPath>
+    </dependency>
+
   </dependencies>
 
   <build>
