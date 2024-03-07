@@ -1,6 +1,8 @@
 package com.example.kpo_big_dz.DataBase;
 
-import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,6 +30,14 @@ public class SQLite {
 
     public static void initDB() {
         try {
+            Path path = Paths.get(defaultDBPath);
+            if (!Files.exists(path)) {
+                try {
+                    Files.createDirectories(path);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
             Class.forName("org.sqlite.JDBC");
             Connection conn = getConnection();
             createTable();
