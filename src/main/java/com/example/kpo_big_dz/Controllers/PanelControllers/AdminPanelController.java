@@ -5,10 +5,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.example.kpo_big_dz.Interfaces.IAdminOrders;
+import com.example.kpo_big_dz.Interfaces.IStatistics;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -22,11 +24,11 @@ import static com.example.kpo_big_dz.Services.WindowServices.*;
 import com.example.kpo_big_dz.Interfaces.IMenu;
 import com.example.kpo_big_dz.Interfaces.IUser;
 
-import static com.example.kpo_big_dz.TempData.Observer.addAdminOrderListSubscriber;
-import static com.example.kpo_big_dz.TempData.Observer.addMenuSubscriber;
 import static com.example.kpo_big_dz.Services.GridPanelServices.loadToGridPaneDishes;
+import static com.example.kpo_big_dz.DataBase.SQLite.*;
+import static com.example.kpo_big_dz.TempData.Observer.*;
 
-public class AdminPanelController implements IMenu, IUser, IAdminOrders {
+public class AdminPanelController implements IMenu, IUser, IAdminOrders, IStatistics {
     private Boolean isAddNewDishOpened = false;
 
     @FXML
@@ -66,13 +68,19 @@ public class AdminPanelController implements IMenu, IUser, IAdminOrders {
     private ScrollPane userOrderScrollPane;
 
     @FXML
-    private ScrollPane statisticsScrollPane;
-
-    @FXML
-    private GridPane statisticsGridPane;
-
-    @FXML
     private Button exclamationButton;
+
+    @FXML
+    private VBox statisticsVBox;
+
+    @FXML
+    private Label mostPopularDishLabel;
+
+    @FXML
+    private Label outcomeLabel;
+
+    @FXML
+    private Label averageRatingLabel;
 
     @FXML
     public void openAddNewDishWindow(ActionEvent e) {
@@ -108,7 +116,15 @@ public class AdminPanelController implements IMenu, IUser, IAdminOrders {
     }
 
     @FXML
+    public void onStatisticButtonClick(ActionEvent e) {
+        hideAllScrollPanes();
+        statisticsVBox.setVisible(true);
+        setStatisticsInformation();
+    }
+
+    @FXML
     void initialize() {
+        addStatisticsSubscriber(this);
         addMenuSubscriber(this);
         addAdminOrderListSubscriber(this);
         loadToGridPaneDishes(menuGridPane, true, 2);
@@ -137,9 +153,30 @@ public class AdminPanelController implements IMenu, IUser, IAdminOrders {
         loadToGridPaneDishes(menuGridPane, true, 2);
     }
 
+    private void setStatisticsInformation() {
+        String mostPopularDish = getMostPopularDish();
+        double averageRating = getAverageRatingOfOrders();
+        int outcome = getOutcomeFromOrders();
+        if (mostPopularDish.isEmpty()) {
+            mostPopularDishLabel.setText("NO INFORMATION");
+        } else {
+            mostPopularDishLabel.setText(mostPopularDish);
+        }
+        if (averageRating == 0) {
+            averageRatingLabel.setText("NO INFORMATION");
+        } else {
+            averageRatingLabel.setText(String.format("%.2f", averageRating));
+        }
+        outcomeLabel.setText(String.valueOf(outcome) + "$");
+    }
+
     private void hideAllScrollPanes() {
         userOrderScrollPane.setVisible(false);
-        statisticsScrollPane.setVisible(false);
+        statisticsVBox.setVisible(false);
         menuScrollPane.setVisible(false);
+    }
+
+    public void updateStatistics() {
+        setStatisticsInformation();
     }
 }

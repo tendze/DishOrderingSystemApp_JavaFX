@@ -164,6 +164,7 @@ public class GridPanelServices {
                     controller.setPurchaseButtonView();
                     controller.getCookButton().setOnAction(e -> {
                         updateOrderStatus(order.getOrderId(), OrderStatus.Completed, userId);
+                        controller.onPurchaseButtonClick();
                     });
                 } else {
                     controller.setNoButtonsView();

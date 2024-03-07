@@ -1,5 +1,6 @@
 package com.example.kpo_big_dz.Controllers.PanelControllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -15,6 +16,7 @@ import javafx.scene.layout.VBox;
 import static com.example.kpo_big_dz.DataBase.SQLite.getUserIdByOrderId;
 import static com.example.kpo_big_dz.DataBase.SQLite.updateOrderStatus;
 import static com.example.kpo_big_dz.TempData.CurrentCookingThreads.currentCookingThreads;
+import static com.example.kpo_big_dz.Services.WindowServices.openNewWindow;
 
 public class UserOrderController {
     @FXML
@@ -42,11 +44,20 @@ public class UserOrderController {
     public void onCookButtonClick(ActionEvent e) {
         int orderId = Integer.parseInt(orderNumberLabel.getText().replace("Order №", ""));
         int userId = getUserIdByOrderId(orderId);
-        System.out.println(userId);
         updateOrderStatus(orderId, OrderStatus.Cooking, userId);
         CookingThread thread = new CookingThread(orderId, userId);
         currentCookingThreads.put(orderId, thread);
         thread.start();
+    }
+
+    public void onPurchaseButtonClick() {
+        try {
+            FeedbackPanelController controller = openNewWindow("user/review_panel.fxml", "Feedback");
+            controller.setUserIdOrderId(userId, orderId);
+        } catch (IOException exception) {
+            System.out.println("onPurchaseButtonClick() exception: " + exception.getMessage());
+            throw new RuntimeException(exception);
+        }
     }
 
     @FXML

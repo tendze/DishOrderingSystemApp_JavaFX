@@ -184,6 +184,9 @@ public class UserPanelController implements IMenu, IUser, IUserOrders {
     @Override
     public void updateUserOrderList(int userId) {
         if (getUserID() == userId) {
+            if (!userOrdersScrollPane.isVisible()) {
+                exclamationButton.setVisible(true);
+            }
             loadToUserOrdersGridPane(userOrdersGridPane, getUserID(), 1);
         }
     }

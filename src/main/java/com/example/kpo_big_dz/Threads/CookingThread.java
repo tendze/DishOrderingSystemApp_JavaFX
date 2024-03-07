@@ -10,7 +10,7 @@ import javafx.util.Duration;
 
 import java.util.Timer;
 
-import static com.example.kpo_big_dz.TempData.Observer.*;
+import static com.example.kpo_big_dz.TempData.CurrentCookingThreads.currentCookingThreads;
 import static com.example.kpo_big_dz.DataBase.SQLite.*;
 
 public class CookingThread extends Thread{
@@ -28,6 +28,7 @@ public class CookingThread extends Thread{
                                     return;
                                 }
                                 updateOrderStatus(orderId, OrderStatus.Ready, userId);
+                                currentCookingThreads.remove(orderId);
                             })
                     );
                     timeLine.play();

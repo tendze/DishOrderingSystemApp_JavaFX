@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import com.example.kpo_big_dz.Models.Dish;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Pair;
@@ -49,6 +50,16 @@ public class DishController {
 
     @FXML
     private Group plusMinusGroup;
+
+    @FXML
+    private Group ratingGroup;
+
+    @FXML
+    private ImageView startImage;
+
+    @FXML
+    private Label ratingLabel;
+
 
     @FXML
     public void onOrderButtonClick(ActionEvent e) {
@@ -145,4 +156,8 @@ public class DishController {
     }
 
     public void setCurrentUserPanelController(UserPanelController panel) { this.currentUserPanel = panel; }
+
+    public void setRating(double rating) {
+        ratingLabel.setText(String.format("%.1f", rating));
+    }
 }

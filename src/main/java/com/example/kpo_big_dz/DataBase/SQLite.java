@@ -68,11 +68,19 @@ public class SQLite {
                 "quantity INTEGER NOT NULL," +
                 "price INTEGER NOT NULL" +
                 ")";
+        String createOrderFeedbackTableQuery = "CREATE TABLE IF NOT EXISTS feedback(" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+                "user_id INTEGER," +
+                "order_id INTEGER," +
+                "comment TEXT," +
+                "rating DOUBLE" +
+                ")";
         try (Connection conn = getConnection(); Statement stmt = conn.createStatement()) {
             stmt.execute(createUserTableQuery);
             stmt.execute(createDishTableQuery);
             stmt.execute(createOrdersTableQuery);
             stmt.execute(createDishesInOrderTableQuery);
+            stmt.execute(createOrderFeedbackTableQuery);
         } catch (SQLException e) {
             System.out.println("createTable() error: " + e.getMessage());
             throw new RuntimeException(e);
@@ -385,6 +393,66 @@ public class SQLite {
         }
     }
 
+    public static void addNewFeedback(int userId, int orderId, String text, double rating) {
+        String addNewFeedbackQuery = "INSERT INTO feedback(user_id, order_id, comment, rating) VALUES(?, ?, ?, ?)";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(addNewFeedbackQuery)) {
+            pstmt.setInt(1, userId);
+            pstmt.setInt(2, orderId);
+            pstmt.setString(3, text);
+            pstmt.setDouble(4, rating);
+            pstmt.executeUpdate();
+            notifyStatisticsSubscribers();
+        } catch (SQLException e) {
+            System.out.println("addNewFeedback() error: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static double getAverageRatingOfOrders() {
+        String selectQuery = "SELECT AVG(rating) FROM feedback";
+        try (Connection conn = getConnection();
+             Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery(selectQuery);
+            if (!rs.next()) {
+                return 0;
+            }
+            return rs.getDouble(1);
+        } catch (SQLException e) {
+            System.out.println("updateOrderStatus() error: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static int getOutcomeFromOrders() {
+        String selectQuery = "SELECT SUM(total_price) FROM `order` WHERE status = \"Completed\"";
+        try (Connection conn = getConnection();
+             Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery(selectQuery);
+            if (!rs.next()) {
+                return 0;
+            }
+            return rs.getInt(1);
+        } catch (SQLException e) {
+            System.out.println("updateOrderStatus() error: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static String getMostPopularDish() {
+        String selectQuery = "SELECT dish_name, COUNT(dish_name) AS cnt FROM order_dishes GROUP BY dish_name ORDER BY cnt DESC";
+        try (Connection conn = getConnection();
+             Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery(selectQuery);
+            if (!rs.next()) {
+                return "";
+            }
+            return rs.getString(1);
+        } catch (SQLException e) {
+            System.out.println("updateOrderStatus() error: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
 
     private static Connection getConnection() {
         String url = "jdbc:sqlite:" + defaultDBPath + dbName;

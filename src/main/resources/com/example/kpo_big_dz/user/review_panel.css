@@ -1,0 +1,20 @@
+.ask-label {
+    -fx-font-family: "Flame Bold";
+    -fx-font-size: 20px;
+}
+
+.feedback-area {
+    -fx-font-family: "Flame Bold";
+}
+
+.alert-label {
+    -fx-font-family: "Flame Bold";
+    -fx-font-size: 12px;
+}
+
+.star-button {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+}

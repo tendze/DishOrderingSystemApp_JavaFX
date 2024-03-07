@@ -10,6 +10,8 @@ public class Observer {
     public static List<IAdminOrders> adminSubscribers = new ArrayList<>();
 
     public static List<IUserOrders> userSubscribers = new ArrayList<>();
+
+    public static List<IStatistics> statisticsSubscribers = new ArrayList<>();
     public static void notifyMenuSubscribers() {
         for (IMenu window : menuSubscribers) {
             window.updateMenuList();
@@ -27,6 +29,13 @@ public class Observer {
             users.updateUserOrderList(userId);
         }
     }
+
+    public static void notifyStatisticsSubscribers() {
+        for (IStatistics stat : statisticsSubscribers) {
+            stat.updateStatistics();
+        }
+    }
+
     public static void addMenuSubscriber(IMenu w) {
         menuSubscribers.add(w);
     }
@@ -36,5 +45,9 @@ public class Observer {
 
     public static void addUserOrderListSubscriber(IUserOrders w) {
         userSubscribers.add(w);
+    }
+
+    public static void addStatisticsSubscriber(IStatistics w) {
+        statisticsSubscribers.add(w);
     }
 }

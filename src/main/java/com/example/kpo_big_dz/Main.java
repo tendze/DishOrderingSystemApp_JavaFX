@@ -15,7 +15,6 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         SQLite.initDB();
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("auth/auth.fxml"));
-        //FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("admin/admin_panel.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Authorization");
         stage.setScene(scene);
