@@ -1,0 +1,82 @@
+.label {
+    -fx-font-family: "Flame Bold";
+}
+
+.dish {
+    -fx-background-color: #fdf6ec;
+    -fx-background-radius: 20px;
+}
+
+.dish-name {
+    -fx-font-family: "Flame Bold";
+    -fx-font-size: 14px;
+}
+
+.dish-info {
+    -fx-font-family: "Flame Bold";
+}
+
+.anchor-pale {
+    -fx-background-radius: 20px;
+}
+
+.delete-button {
+    -fx-background-color:  #d62300;
+    -fx-background-radius: 30px;
+    -fx-font-family: "Flame Bold";
+    -fx-text-fill: White;
+}
+
+.delete-button:hover {
+    -fx-background-color: #a71b00;
+}
+
+.delete-button:pressed {
+    -fx-background-color: #a71b00;
+}
+
+.order-button {
+    -fx-background-radius: 20px;
+    -fx-background-color: #fc6e21;
+    -fx-font-family: "Flame Bold";
+}
+
+.order-button:hover {
+    -fx-background-color: #d4662a;
+}
+
+.order-button:pressed {
+    -fx-background-color: #d4662a;
+}
+
+.minus-button {
+    -fx-background-radius: 20 0 0 20;
+    -fx-background-color: #fc6e21;
+    -fx-font-family: "Flame Bold";
+}
+
+.minus-button:hover {
+    -fx-background-color: #d4662a;
+}
+
+.minus-button:pressed {
+    -fx-background-color: #d4662a;
+}
+
+.plus-button {
+    -fx-background-radius: 0 20 20 0;
+    -fx-background-color: #fc6e21;
+    -fx-font-family: "Flame Bold";
+}
+
+.plus-button:hover {
+    -fx-background-color: #d4662a;
+}
+
+.plus-button:pressed {
+    -fx-background-color: #d4662a;
+}
+
+.quantity-field {
+    -fx-font-family: "Flame Bold";
+}

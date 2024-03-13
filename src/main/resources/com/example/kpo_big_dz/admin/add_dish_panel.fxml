@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="256.0" prefWidth="256.0" styleClass="anchor-pale" stylesheets="@add_dish_panel.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kpo_big_dz.Controllers.PanelControllers.AddNewDishController">
+   <children>
+      <Label fx:id="dishExistsLabel" layoutX="20.0" layoutY="47.0" prefHeight="17.0" prefWidth="226.0" styleClass="dish-already-exists-label" text="There's already a dish with that name!" visible="false" />
+      <Label layoutX="26.0" layoutY="10.0" styleClass="add-new-dish-label" text="ADD NEW DISH" />
+      <VBox layoutX="37.0" layoutY="66.0" prefHeight="139.0" prefWidth="183.0" spacing="10.0">
+         <children>
+            <TextField fx:id="dishNameField" prefHeight="27.0" prefWidth="201.0" promptText="Dish name" styleClass="input-field" />
+            <TextField fx:id="quantityField" prefHeight="27.0" prefWidth="201.0" promptText="Quantity" styleClass="input-field" />
+            <TextField fx:id="priceField" prefHeight="27.0" prefWidth="201.0" promptText="Price (in $)" styleClass="input-field" />
+            <TextField fx:id="difficultyField" prefHeight="27.0" prefWidth="201.0" promptText="Difficulty (in seconds)" styleClass="input-field" />
+         </children>
+      </VBox>
+      <Button fx:id="addNewDishButton" layoutX="67.0" layoutY="212.0" mnemonicParsing="false" onAction="#addNewDish" prefHeight="25.0" prefWidth="65.0" style="-fx-background-radius: 30;" styleClass="add-button" text="Add">
+         <effect>
+            <DropShadow color="#ff000081" />
+         </effect>
+      </Button>
+      <Button fx:id="refreshButton" layoutX="198.0" layoutY="208.0" mnemonicParsing="false" onAction="#refreshFields" prefHeight="38.0" prefWidth="33.0" style="-fx-background-color: transparent;">
+         <effect>
+            <DropShadow color="#ff000081" />
+         </effect>
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/refresh-icon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>
